@@ -8,77 +8,112 @@ import java.io.IOException;
 
 class Proj01Runner{
 
+    Picture picture = new Picture("Proj01.jpg");
+    private Turtle forceshield, lightsaber;
+
     
     //Constructor
     public Proj01Runner(){
         System.out.println("Alan Cugler.");}
 
-    
-    //Setting World size
-    Picture picture = new Picture("Proj01.jpg");
-    private World mars = new World(picture.getWidth(),picture.getHeight());
+    double xOff = -0.0;
+    double yOff = 0.01;
+    double rVal = 0.56;
+    double yVal = 0;
+    int row = 0;
+    int col = 0;
+    double xVal = -rVal;
+    double xInc = 2*rVal/100;
 
-    
-    //Setting Turtles in mars
-    private Turtle forceshield = new Turtle(mars);
-    private Turtle lightsaber = new Turtle(mars);
-
+    double function(double rVal,double xVal){
+        double yVal = Math.sqrt(rVal*rVal - xVal*xVal + 0.0000000001);
+        return yVal;}
     
     //Setting run function
-    public void run(){    
-        mars.setPicture(new Picture("Proj01.jpg"));}
-
-
-    //Setting explore function
-    public void explore(){
-
-        //Cross hairs width
-        forceshield.hide();
-        forceshield.setPenWidth(2);
-        forceshield.setPenColor(Color.PINK);
-        forceshield.penUp();
-        forceshield.moveTo(mars.getWidth(),mars.getHeight()/2);
-        forceshield.penDown();
-        forceshield.moveTo(0,mars.getHeight()/2);
-        forceshield.penUp();
-
-        //Cross hairs height
+    public void run(){
+        
+        //Print on picture
+        forceshield = new Turtle(picture.getWidth(),picture.getHeight()/2,picture);
+        lightsaber = new Turtle(picture.getWidth()/2,picture.getHeight(),picture);
+        
+        picture.addMessage("I certify that this program is my own work", 20, 20);
+        picture.addMessage("and is not the work of others. I agree not", 20, 40);
+        picture.addMessage("to share my solution with others.", 20, 60);
+        picture.addMessage("Alan Cugler.", 20, 80);
+    
+        //Cross hairs vertical
         lightsaber.hide();
         lightsaber.setPenWidth(2);
-        lightsaber.setPenColor(Color.PINK);
+        lightsaber.setPenColor(Color.MAGENTA);
         lightsaber.penUp();
-        lightsaber.moveTo(mars.getWidth()/2,mars.getHeight());
+        lightsaber.moveTo(picture.getWidth()/2,picture.getHeight());
         lightsaber.penDown();
-        lightsaber.moveTo(mars.getWidth()/2,0);
+        lightsaber.moveTo(picture.getWidth()/2,0);
         lightsaber.penUp();
+
+        double xScale = 1.0*picture.getHeight()/2;
+        double yScale = 1.0*picture.getHeight()/2;
         
-        //Half Circle
-        forceshield.moveTo(mars.getWidth()/2,mars.getHeight()/4);
-        forceshield.setPenWidth(4);
-        forceshield.setPenColor(Color.CYAN);
-        forceshield.penDown();
-        //forceshield.moveTo(197, 147);
+        //Red 1/4 circle
+        forceshield.penUp();
+        forceshield.hide();
         forceshield.setPenWidth(3);
         forceshield.setPenColor(Color.RED);
-        //forceshield.moveTo(XXXXXXXXXXXXXXXX);
+        for(int cnt=0; cnt<=50;cnt++,xVal += xInc){
+            yVal = function(rVal,xVal);
+            col = (int)((xOff+xVal)*xScale);
+            row = (int)((yOff-yVal)*yScale);
+            forceshield.moveTo(col + picture.getWidth()/2, row + picture.getHeight()/2);
+            forceshield.penDown();};
+        forceshield.penUp();
+        
+        //Cyan 1/4 Circle
+        forceshield.setPenWidth(4);
+        forceshield.setPenColor(Color.CYAN);
+        forceshield.penUp();
+        for(int cnt=0; cnt<=49;cnt++,xVal += xInc){
+            yVal = function(rVal,xVal);
+            col = (int)((xOff-xVal)*xScale);
+            row = (int)((yOff+yVal)*yScale);
+            forceshield.moveTo(col + picture.getWidth()/2, row + picture.getHeight()/2);
+            forceshield.penDown();};
+        forceshield.penUp();
+
+        //Cross hairs horizontal
+        forceshield.setPenWidth(2);
+        forceshield.setPenColor(Color.MAGENTA);
+        forceshield.penUp();
+        forceshield.moveTo(picture.getWidth(),picture.getHeight()/2);
+        forceshield.penDown();
+        forceshield.moveTo(0,picture.getHeight()/2);
         forceshield.penUp();
         
         //Lightsaber
-        //lightsaber.moveTo(157, 177);
         lightsaber.setPenWidth(3);
         lightsaber.setPenColor(Color.YELLOW);
+        lightsaber.moveTo(96*picture.getWidth()/200,114*picture.getHeight()/200);
         lightsaber.penDown();
-        //lightsaber.moveTo(XXXXXXXXXXXXXXXX);
-
+        lightsaber.moveTo(39*picture.getWidth()/100,60*picture.getHeight()/100);
+        lightsaber.penUp();
     }
 
-
+    
     //maybe done?
-    public Turtle getForceshield(){return forceshield;}
+    public Picture getMars(){
+        return picture;}
 
-    //maybe done?
-    public Turtle getLightsaber(){return lightsaber;}
+    
+    //Setting data before printing
+    public Turtle getForceshield(){
+        forceshield.setName("Forceshield");
+        forceshield.moveTo(197, 147);
+        forceshield.turn(90);
+        return forceshield;}
 
-    //maybe done?
-    public Picture getMars(){return mars.getPicture();}
+    
+    //Setting data before printing
+    public Turtle getLightsaber(){
+        lightsaber.setName("Lightsaber");
+        lightsaber.moveTo(157, 177);
+        return lightsaber;}
 }
