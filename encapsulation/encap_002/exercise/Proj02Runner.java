@@ -10,7 +10,7 @@ class Proj02Runner{
     private Turtle Redds;
 
     private Pixel pix;
-    public int x, y, xCor, yCor;
+    public int x, y;
     
     public int[] latitude = new int[394];
     public int[] longitude = new int[295];
@@ -24,7 +24,6 @@ class Proj02Runner{
 
         //Print on picture
         Redds = new Turtle(394,295,picture);
-                           //picture.getWidth(),picture.getHeight()/2,picture);
 
         picture.addMessage("I certify that this program is my own work", 10, 20);
         picture.addMessage("and is not the work of others. I agree not", 10, 38);
@@ -35,7 +34,6 @@ class Proj02Runner{
         for(int x = 0; x < latitude.length; x++){
             for(int y = 0; y < longitude.length; y++){
                 pix = picture.getPixel(x,y);
-                //System.out.println(-0.397959*x+77);
                 if (y < (-0.397959*x-77)*-1){
                     pix.setRed(255 - pix.getRed());
                     pix.setGreen(255 - pix.getGreen());
@@ -51,21 +49,9 @@ class Proj02Runner{
         Redds.moveTo(picture.getWidth(),161*picture.getHeight()/200);
         Redds.penUp();
         
-        //Pixel[] pixels = picture.getPixels();
-
-        //for(Pixel pix:pixels ){
-        //  pix.setRed(255 - pix.getRed());
-        //   pix.setGreen(255 - pix.getGreen());
-        //  pix.setBlue(127);}
-        //end for loop
-
-        
-        
-        //displaying the modified picture
         picture.explore();
     }
 
-        //
         public Picture getPicture(){
             return picture;}
 }
