@@ -11,6 +11,7 @@ class Proj03Runner{
     Picture picture = new Picture("Proj03a.bmp");
     private Turtle budlight;
     private Pixel pix;
+    private Pixel[] pixArray = picture.getPixels();
     private int xCor, yCor, col, row, green, red, blue;
     private int width = picture.getWidth();
     private int height = picture.getHeight();
@@ -37,29 +38,16 @@ class Proj03Runner{
         yVal = 0;
         xVal = -1;
 
+        greenScale = 0;
+        redScale = 0;
+
         budlight.hide();
         budlight.penUp();
         budlight.setPenWidth(5);
         budlight.setPenColor(Color.RED);
 
-        //Parabola line
-        for(int cnt=0; cnt<=100;cnt++,xVal += 0.02){
-            yVal = function(xVal);
-
-            col = (int)((xOff+xVal)*xScale);
-            row = (int)((yOff+yVal)*yScale);
-
-            if (col + width/2 < 350 && col + width/2 > -1){
-                if (row + height/2 < 280 && row + height/2 > -1){
-                    budlight.moveTo(col + width/2, row + height/2);
-                    budlight.penDown();
-                }}}
-
         
         //Color fading
-        greenScale = 0;
-        redScale = 0;
-
         for(int xCor = 0; xCor < latitude.length; xCor++){
             for(int yCor = 0; yCor < longitude.length; yCor++){ 
                 pix = picture.getPixel(xCor,yCor);
@@ -72,6 +60,43 @@ class Proj03Runner{
                 pix.setRed((int)(red * redScale));
             }}
 
+        for(int xCor = 0; xCor < latitude.length; xCor++, xVal += 0.02){
+            yVal = function(xVal);
+
+            col = (int)((xOff+xVal)*xScale);
+            row = (int)((yOff+yVal)*yScale);
+
+            for(int yCor = 0; yCor < longitude.length; yCor++){
+                pix = picture.getPixel(xCor,yCor);
+                green = pix.getGreen();
+                red = pix.getRed();
+
+                if(xCor < col + width){
+                    if(yCor < row + height/4){
+                        pix.setBlue(64);
+                        pix.setGreen(255);
+                        pix.setRed(128);
+                    }}
+            }
+        }
+
+        xVal = -1;
+        yVal = 0;
+        //Parabola line
+        for(int cnt=0; cnt<=100;cnt++,xVal += 0.02){
+            yVal = function(xVal);
+            
+            col = (int)((xOff+xVal)*xScale);
+            row = (int)((yOff+yVal)*yScale);
+            
+            if (col + width/2 < 350 && col + width/2 > -1){
+                if (row + height/2 < 280 && row + height/2 > -1){
+                    budlight.moveTo(col + width/2, row + height/2);
+                    budlight.penDown();
+                }
+            }
+        }
+        
         
         //In picture message
         picture.addMessage("I certify that this program is my own work", 10, 20);
