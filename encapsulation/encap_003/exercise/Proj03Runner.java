@@ -1,122 +1,62 @@
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
-import java.io.IOException;
-
-
 class Proj03Runner{
 
     //Class variables
     Picture picture = new Picture("Proj03a.bmp");
     private Turtle budlight;
-    private Pixel pix;
+    private Pixel pix, topPixel, bottomPixel, leftPixel, rightPixel;
     private Pixel[] pixArray = picture.getPixels();
-    private int xCor, yCor, col, row, green, red, blue;
+    private int xCor, yCor, col, row, green, red, blue, cnt;
     private int width = picture.getWidth();
     private int height = picture.getHeight();
     private int[] latitude, longitude;
-    private double xOff, yOff, xScale, yScale, yVal, xVal, greenScale, redScale, blueScale;
+    private double xOff, yOff, xScale, yScale, yVal, xVal, greenScale, redScale, blueScale; 
 
+    Picture getPicture(){
+        return picture;
+    }
     
-    //Constructor
-    public Proj03Runner(){
-        System.out.println("Alan Cugler.");}
+    void run(){
+        System.out.println("Alan Cugler");
 
+        xScale = 0.9 * (double)height/2;
 
-    //Picture modifications & publication
-    public void run(){
-
-        budlight = new Turtle(348,279,picture);
-        latitude = new int[348];
-        longitude = new int[279];
-
-        xOff = 0.0;
-        yOff = -0.55;
-        xScale = 1.0*width/2;
-        yScale = 0.9*height/2;
-        yVal = 0;
-        xVal = -1;
-
-        greenScale = 0;
-        redScale = 0;
-
-        budlight.hide();
-        budlight.penUp();
-        budlight.setPenWidth(5);
-        budlight.setPenColor(Color.RED);
-
-        
-        //Color fading
-        for(int xCor = 0; xCor < latitude.length; xCor++){
-            for(int yCor = 0; yCor < longitude.length; yCor++){ 
-                pix = picture.getPixel(xCor,yCor);
-                green = pix.getGreen();
-                red = pix.getRed();
+        for (xCor = 0; xCor < width; ++xCor){
+            for (yCor = 0; yCor < height; ++yCor) {
                 
-                greenScale = (double)(width - xCor)/width;
-                redScale = (double)(xCor)/width;
-                pix.setGreen((int)(green * greenScale));
-                pix.setRed((int)(red * redScale));
-            }}
+                Pixel pixel = picture.getPixel(xCor, yCor);
+                red = pixel.getRed();
+                green = pixel.getGreen();
+                blue = pixel.getBlue();
+                
+                double red_pixel_change = (double)xCor / (double)width;
+                double green_pixel_change = (double)(width-xCor) / (double)width;
+                
+                double cubic = function((double)(xCor-width/2) / (double)(width/2));
+                double curveLine = xScale * cubic + (double)(height/4);
 
-        for(int xCor = 0; xCor < latitude.length; xCor++, xVal += 0.02){
-            yVal = function(xVal);
-
-            col = (int)((xOff+xVal)*xScale);
-            row = (int)((yOff+yVal)*yScale);
-
-            for(int yCor = 0; yCor < longitude.length; yCor++){
-                pix = picture.getPixel(xCor,yCor);
-                green = pix.getGreen();
-                red = pix.getRed();
-
-                if(xCor < col + width){
-                    if(yCor < row + height/4){
-                        pix.setBlue(64);
-                        pix.setGreen(255);
-                        pix.setRed(128);
-                    }}
-            }
-        }
-
-        xVal = -1;
-        yVal = 0;
-        //Parabola line
-        for(int cnt=0; cnt<=100;cnt++,xVal += 0.02){
-            yVal = function(xVal);
-            
-            col = (int)((xOff+xVal)*xScale);
-            row = (int)((yOff+yVal)*yScale);
-            
-            if (col + width/2 < 350 && col + width/2 > -1){
-                if (row + height/2 < 280 && row + height/2 > -1){
-                    budlight.moveTo(col + width/2, row + height/2);
-                    budlight.penDown();
+                //drawing line
+                if ((double)yCor < curveLine + 5.0 && (double)yCor > curveLine - 5.0) {
+                    pixel.setColor(Color.RED);
                 }
-            }
-        }
-        
-        
-        //In picture message
+
+                //shading below the line
+                else if ((double)yCor > curveLine) {
+                    pixel.setRed((int)((double)red * red_pixel_change));
+                    pixel.setGreen((int)((double)green * green_pixel_change));
+                    pixel.setBlue((int)((double)blue));
+                }}}
+
         picture.addMessage("I certify that this program is my own work", 10, 20);
         picture.addMessage("and is not the work of others. I agree not", 10, 38);
         picture.addMessage("to share my solution with others.", 10, 56);
-        picture.addMessage("Alan Cugler.", 10, 74);
-
-        
-        //Publish the modified picture
+        picture.addMessage("Alan Cugler", 10, 74);
         picture.explore();
     }
+    
+    
 
-
-    //Returns modified picture
-    public Picture getPicture(){
-        return picture;} 
-
-
-    //
     double function(double xVal){
-        yVal = xVal*xVal*xVal;
-        return yVal;}  
-}
+        double yVal = xVal*xVal*xVal;
+        return yVal;
+    }}
