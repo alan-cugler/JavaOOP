@@ -13,7 +13,7 @@ class Proj04Runner{
     private Turtle budlight;
     private Pixel pix, topPixel, bottomPixel, leftPixel, rightPixel;
     private Pixel[] pixArray = picture.getPixels();
-    private int xCor, yCor, col, row, green, red, blue, cnt;
+    private int xCor, yCor, col, row, green, red, blue;
     private int width = picture.getWidth();
     private int height = picture.getHeight();
     private int[] latitude, longitude;
@@ -22,12 +22,13 @@ class Proj04Runner{
 
     //Constructor
     public Proj04Runner(){
+
         System.out.println("Alan Cugler.");}
 
 
     //Picture modifications & publication
     public Picture run(){
-
+        
         //In picture message
         pictureMessage();
 
