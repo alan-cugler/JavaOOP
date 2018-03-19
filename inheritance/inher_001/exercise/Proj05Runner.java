@@ -30,7 +30,6 @@ class Proj05Runner extends Proj05{
     //Picture modifications & publication
     public void run(){
 
-        background.explore();
         backgroundColoring();
         floorSetting();
         personSetting();
