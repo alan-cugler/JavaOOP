@@ -1,7 +1,3 @@
-//34567890123456789012345678901234567890123456789012345678
-
-/*File Proj08 Copyright 2013, R.G.Baldwin
-*********************************************************/
 import java.util.*;
 
 class Proj08{
@@ -16,6 +12,5 @@ class Proj08{
     
     System.out.println(randomNumber);
 
-  }//end main
-}//end class Proj08
-//End program specifications
+  }
+}

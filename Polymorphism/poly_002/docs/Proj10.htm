@@ -1,0 +1,188 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>ITSE 2321 Assignment</title>
+<style type="text/css">
+.style1 {
+	color: #FF0000;
+}
+.style2 {
+	text-align: center;
+}
+ul{color: maroon}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt"
+bgcolor="#FEFFF0" link="#0000ff" vlink="#cc00cc" alink="#ff0000">
+
+<center>
+<h3 style="text-align: center;" class="style1"></h3>
+<h3 style="text-align: center;"><em>Richard G Baldwin (512) 223-4758, NRG Room
+4238, Baldwin@DickBaldwin.com<br/>
+http://www.austincc.edu/baldwin/</em></h3>
+</center>
+
+<center>
+<h2>ITSE 2321 Object-Oriented Programming</h2>
+</center>
+
+<center>
+<h2 style="text-align: center;">Project 10</h2>
+</center>
+File Proj10.htm 
+
+<p>R. G. Baldwin instructor<br/>
+ </p>
+
+<center>
+<h2>Read The Instructions Carefully</h2>
+</center>
+
+<p>A detailed set of instructions is provided in a separate document titled <strong>Instructions for Downloading and Submitting Assignments </strong> that you can
+view at the official web site for this course.</p>
+<p>I recommend that you study those instructions <strong>very carefully</strong> 
+and make yourself a checklist to ensure that you meet all of the 
+requirements before submitting your assignment.</p>
+<p>Failure to follow the instructions to the letter usually results in a
+failing grade, normally zero. The general instructions in that document apply
+to this assignment. In addition, this document provides specific
+instructions for the assignment. </p>
+
+<p>If you have any questions regarding instructions, please ask them at least
+one week prior to the assignment deadline. Don't end up with a bad grade due to the
+fact that you didn't understand the instructions. </p>
+
+<p>Every semester there are one or two students who are surprised and saddened
+to learn that I really do mean that you must follow the instructions and meet
+the specifications exactly or you won't get credit for the assignment. Don't be
+one of those students.</p>
+
+<center>
+<h2><strong>Typographical Errors</strong></h2>
+</center>
+If you discover any typographical errors in this document, please let me know
+so that I can correct the error and notify all of the students.
+
+<h2 align="center">Source Code and Class Files</h2>
+
+<p>You will find a source code file for the driver class for the program 
+in the same zip file from which you extracted this project specification.</p>
+<p>You will also find compiled class files for my version of the program in that 
+same zip file. Run my version of the program side-by-side with your version and 
+compare your output with my output to make sure they match before 
+submitting your assignment.</p>
+
+<center>
+<h2><strong>Java and Media Library Version Requirement</strong></h2>
+</center>
+
+<p>Software version requirements are specified in the accompanying document 
+titled <strong>Instructions for Downloading and Submitting Assignments</strong> and in the syllabus for this course.</p>
+<h2 class="style2">Generics</h2>
+<p>When you compile and run your program, or when you run my version of the 
+program, you may encounter a warning message that reads something like the 
+following <em>(the name of the program will be different from that shown below):</em></p>
+<pre>Note: .\Proj18Runner.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.</pre>
+<p>This is the result of something called <em>Generics</em> that was introduced 
+in Java version 1.5.</p>
+<p>Ideally we would write our code in such a way that this warning message 
+would never be displayed. However, Generics is a very complex topic. A complete 
+understanding of Generics is 
+beyond the scope of this course. Therefore, if you see such a warning when you 
+run&nbsp;your 
+programs or mine, feel free to ignore the warning, provided of course that your 
+program meets the specifications in every other respect.</p>
+<table border="1" cellpadding="0" bgcolor="#eeeeee">
+  <tbody>
+    <tr>
+      <td><p>Proj10 Copyright 2013 R.G.Baldwin</p>
+<p>Among other things, this assignment involves:
+ </p>
+<ul>
+	<li>Working with collections.</li>
+	<li>Working with the Collection interface and concrete 
+  implementations of the interface.
+ </li>
+	<li>Working with the Iterator interface. </li>
+	<li>Using skills learned in previous assignments.</li>
+</ul>
+		<p>There are no graphic output images required by this program. Therefore, it can be compiled and executed without a requirement to have Ericson's media library on the classpath.
+
+</p>
+	  <p>PROGRAM SPECIFICATIONS</p>
+		<p>Write a program named Proj10 that uses the class definition contained 
+		in the file named Proj10.java to produce text output as described below.</p>
+	  <p>Your challenge is to examine the code in the file named Proj10.java 
+	  along with the output text shown below to deduce the algorithm required to 
+	  produce that output and to implement that algorithm in a file named 
+	  Proj10Runner.java.</p>
+	  <p>The output text for any given run will depend on the input value 
+	  provided as a command-line parameter. The text shown below was produced by 
+	  five consecutive runs of the program for input values of 1, 2, 3, 4, and 5 
+	  respectively. I will test your program with a different undisclosed input 
+	  value. You can test your program by running your version and my version 
+	  side-by-side and comparing the results for any input value that you choose.</p>
+		<p>You must define a new class named Proj10Runner. You may define other new classes as necessary to cause your program to behave as required, but you may not modify the class definition for the class named 
+		Proj10.
+
+</p>
+	  <p>You must display the certification shown below on the command-line 
+	  screen.</p>
+<pre>
+I certify that this program is my own work
+and is not the work of others. I agree not
+to share my solution with others.
+Print your name here.
+
+Input:  chris Bill Chris Chris Don don don Bill
+Output: Bill Bill chris Chris Chris Don don don
+
+I certify that this program is my own work
+and is not the work of others. I agree not
+to share my solution with others.
+Print your name here.
+
+Input:  bill Don chris don don bill ann Ann
+Output: ann Ann bill bill chris Don don don
+
+I certify that this program is my own work
+and is not the work of others. I agree not
+to share my solution with others.
+Print your name here.
+
+Input:  Ann Chris chris don don chris chris Bill
+Output: Ann Bill Chris chris chris chris don don
+
+I certify that this program is my own work
+and is not the work of others. I agree not
+to share my solution with others.
+Print your name here.
+
+Input:  ann Ann Ann Don Don don Chris Chris
+Output: ann Ann Ann Chris Chris Don Don don
+
+I certify that this program is my own work
+and is not the work of others. I agree not
+to share my solution with others.
+Print your name here.
+
+Input:  Ann ann Ann Bill don bill Chris Ann
+Output: Ann ann Ann Ann Bill bill Chris don
+</pre></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<p>-end-
+ </p>
+<br/>
+</body>
+</html>
